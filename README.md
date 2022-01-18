@@ -22,10 +22,16 @@ URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluac
 ## Bonus
 
 3. Filtrar listado de Adalabers por nombre y/o tutora
+4. Mostrar redes sociales
 
-## Otras funcionalidades de mi ejercicio
+### Tareas para mejorar el ejercicio:
 
--
+- [ ] Obtener tutoras directamente de los resultados de la API
+- [ ] Generar id único con node-uuid
+- [ ] Guardar datos en almacenamiento local
+- [ ] Crear estilos CSS
+
+---
 
 # My React Starter Kit ✨
 

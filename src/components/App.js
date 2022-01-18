@@ -112,7 +112,6 @@ function App() {
               <option>Yanelis</option>
               <option>Dayana</option>
               <option>Iván</option>
-              <option>Miguel</option>
             </select>
           </form>
         </section>
