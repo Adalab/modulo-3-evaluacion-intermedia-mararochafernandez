@@ -1,24 +1,20 @@
 import '../styles/App.scss';
-//import { useEffect, useState } from 'react';
-//import callToApi from '../services/api';
+import { useEffect, useState } from 'react';
+import callToApi from '../services/api';
 //import localStorage from '../services/localstorage';
 
 function App() {
   /* Let's do magic! 🦄🦄🦄 */
 
-  const getTitle = (text) => <h1>{text}</h1>;
+  // state
+  const [adalabers, setAdalabers] = useState([]);
 
   // api
-
-  //const [data, setData] = useState({});
-
-  /*
   useEffect(() => {
     callToApi().then((response) => {
-      setData(response);
+      setAdalabers(response);
     });
   }, []);
-  */
 
   // local storage
 
@@ -42,10 +38,17 @@ function App() {
   });
   */
 
+  // render helpers
+  const renderHeader = (title) => {
+    <h1>{title}</h1>;
+  };
+
   return (
     // HTML ✨
 
-    <div className="app">{getTitle('Hola mundo')}</div>
+    <div className="app">
+      <header>{renderHeader('Adalabers')}</header>
+    </div>
   );
 }
 
