@@ -21,7 +21,11 @@ URL del ejercicio: [Listado de Adalabers](#)
 
 ## Bonus
 
-3. Filtrar listado de Adalabers
+3. Filtrar listado de Adalabers por nombre y/o tutora
+
+## Otras funcionalidades de mi ejercicio
+
+-
 
 # My React Starter Kit ✨
 
