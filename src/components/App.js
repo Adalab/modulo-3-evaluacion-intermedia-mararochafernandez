@@ -80,8 +80,17 @@ function App() {
           <td>{adalaber.name}</td>
           <td>{adalaber.counselor}</td>
           <td>{adalaber.speciality}</td>
+          <td>{renderSocialNetworks(adalaber.socialNetworks)}</td>
         </tr>
       ));
+  };
+
+  const renderSocialNetworks = (socialNetworks) => {
+    return socialNetworks.map((socialNetwork, index) => (
+      <a key={index} href={socialNetwork.url}>
+        {socialNetwork.name}
+      </a>
+    ));
   };
 
   return (
@@ -123,6 +132,7 @@ function App() {
                 <th>Nombre</th>
                 <th>Tutora</th>
                 <th>Especialidad</th>
+                <th>Redes sociales</th>
               </tr>
             </thead>
 
