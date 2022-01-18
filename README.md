@@ -23,6 +23,7 @@ URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluac
 
 3. Filtrar listado de Adalabers por nombre y/o tutora
 4. Mostrar redes sociales
+5. Maquetación
 
 ### Tareas para mejorar el ejercicio:
 
@@ -30,6 +31,7 @@ URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluac
 - [ ] Generar id único con node-uuid
 - [ ] Guardar datos en almacenamiento local
 - [ ] Crear estilos CSS
+- [ ] Crear celdas para redes sociales en la tabla
 
 ---
 
