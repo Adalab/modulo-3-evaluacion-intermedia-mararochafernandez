@@ -39,8 +39,19 @@ function App() {
   */
 
   // render helpers
+
   const renderHeader = (title) => {
     <h1>{title}</h1>;
+  };
+
+  const renderAdalabers = () => {
+    return adalabers.map((adalaber) => (
+      <tr key={adalaber.id}>
+        <td>{adalaber.name}</td>
+        <td>{adalaber.counselor}</td>
+        <td>{adalaber.speciality}</td>
+      </tr>
+    ));
   };
 
   return (
@@ -48,6 +59,17 @@ function App() {
 
     <div className="app">
       <header>{renderHeader('Adalabers')}</header>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tutora</th>
+            <th>Especialidad</th>
+          </tr>
+        </thead>
+
+        <tbody>{renderAdalabers()}</tbody>
+      </table>
     </div>
   );
 }

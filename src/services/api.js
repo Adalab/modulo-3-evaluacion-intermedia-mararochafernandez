@@ -3,9 +3,16 @@ const callToApi = () => {
     'https://beta.adalab.es/pw-recursos/apis/adalabers-v1/promo-patata.json'
   )
     .then((response) => response.json())
-    .then((response) => {
-      return response.results;
-    });
+    .then((response) =>
+      response.results.map((result) => {
+        return {
+          id: result.id,
+          name: result.name,
+          counselor: result.counselor,
+          speciality: result.speciality,
+        };
+      })
+    );
 };
 
 export default callToApi;
