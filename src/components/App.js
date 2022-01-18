@@ -8,6 +8,11 @@ function App() {
 
   // state
   const [adalabers, setAdalabers] = useState([]);
+  const [newAdalaber, setNewAdalaber] = useState({
+    name: '',
+    counselor: '',
+    speciality: '',
+  });
 
   // api
   useEffect(() => {
@@ -38,6 +43,30 @@ function App() {
   });
   */
 
+  // events hendlers
+
+  const handleNewAdalaberForm = (event) => {
+    event.preventDefault();
+  };
+
+  const handleNewAdalaberInput = (event) => {
+    setNewAdalaber({
+      ...newAdalaber,
+      [event.currentTarget.id]: event.currentTarget.value,
+    });
+  };
+
+  const handleNewAdalaberButton = () => {
+    if (newAdalaber.name && newAdalaber.counselor && newAdalaber.speciality) {
+      setAdalabers([...adalabers, newAdalaber]);
+      setNewAdalaber({
+        name: '',
+        counselor: '',
+        speciality: '',
+      });
+    }
+  };
+
   // render helpers
 
   const renderHeader = (title) => {
@@ -45,8 +74,8 @@ function App() {
   };
 
   const renderAdalabers = () => {
-    return adalabers.map((adalaber) => (
-      <tr key={adalaber.id}>
+    return adalabers.map((adalaber, index) => (
+      <tr key={index}>
         <td>{adalaber.name}</td>
         <td>{adalaber.counselor}</td>
         <td>{adalaber.speciality}</td>
@@ -59,17 +88,61 @@ function App() {
 
     <div className="app">
       <header>{renderHeader('Adalabers')}</header>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tutora</th>
-            <th>Especialidad</th>
-          </tr>
-        </thead>
 
-        <tbody>{renderAdalabers()}</tbody>
-      </table>
+      <main>
+        <section>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tutora</th>
+                <th>Especialidad</th>
+              </tr>
+            </thead>
+
+            <tbody>{renderAdalabers()}</tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Añadir nueva Adalaber</h2>
+
+          <form onSubmit={handleNewAdalaberForm}>
+            <label htmlFor="name">Nombre:</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={newAdalaber.name}
+              onChange={handleNewAdalaberInput}
+            />
+
+            <label htmlFor="name">Tutora:</label>
+            <input
+              type="text"
+              name="counselor"
+              id="counselor"
+              value={newAdalaber.counselor}
+              onChange={handleNewAdalaberInput}
+            />
+
+            <label htmlFor="name">Especialidad:</label>
+            <input
+              type="text"
+              name="speciality"
+              id="speciality"
+              value={newAdalaber.speciality}
+              onChange={handleNewAdalaberInput}
+            />
+
+            <input
+              type="submit"
+              value="Añadir nueva Adalaber"
+              onClick={handleNewAdalaberButton}
+            />
+          </form>
+        </section>
+      </main>
     </div>
   );
 }
