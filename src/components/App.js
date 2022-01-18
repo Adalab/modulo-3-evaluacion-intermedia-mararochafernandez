@@ -12,6 +12,7 @@ function App() {
     counselor: '',
     speciality: '',
   });
+  const [searchName, setSearchName] = useState('');
 
   // api
   useEffect(() => {
@@ -22,7 +23,7 @@ function App() {
 
   // event handlers
 
-  const handleNewAdalaberForm = (event) => {
+  const handleForm = (event) => {
     event.preventDefault();
   };
 
@@ -44,6 +45,10 @@ function App() {
     }
   };
 
+  const handleSearchNameInput = (event) => {
+    setSearchName(event.currentTarget.value);
+  };
+
   // render helpers
 
   const renderHeader = (title) => {
@@ -51,13 +56,19 @@ function App() {
   };
 
   const renderAdalabers = () => {
-    return adalabers.map((adalaber, index) => (
-      <tr key={index}>
-        <td>{adalaber.name}</td>
-        <td>{adalaber.counselor}</td>
-        <td>{adalaber.speciality}</td>
-      </tr>
-    ));
+    return adalabers
+      .filter((adalaber) =>
+        adalaber.name
+          .toLocaleLowerCase()
+          .includes(searchName.toLocaleLowerCase())
+      )
+      .map((adalaber, index) => (
+        <tr key={index}>
+          <td>{adalaber.name}</td>
+          <td>{adalaber.counselor}</td>
+          <td>{adalaber.speciality}</td>
+        </tr>
+      ));
   };
 
   return (
@@ -67,6 +78,19 @@ function App() {
       <header>{renderHeader('Adalabers')}</header>
 
       <main>
+        <section>
+          <form onSubmit={handleForm}>
+            <label htmlFor="searchName">Nombre:</label>
+            <input
+              type="text"
+              name="searchName"
+              id="searchName"
+              value={searchName}
+              onChange={handleSearchNameInput}
+            />
+          </form>
+        </section>
+
         <section>
           <table>
             <thead>
@@ -84,7 +108,7 @@ function App() {
         <section>
           <h2>Añadir nueva Adalaber</h2>
 
-          <form onSubmit={handleNewAdalaberForm}>
+          <form onSubmit={handleForm}>
             <label htmlFor="name">Nombre:</label>
             <input
               type="text"
@@ -94,7 +118,7 @@ function App() {
               onChange={handleNewAdalaberInput}
             />
 
-            <label htmlFor="name">Tutora:</label>
+            <label htmlFor="counselor">Tutora:</label>
             <input
               type="text"
               name="counselor"
@@ -103,7 +127,7 @@ function App() {
               onChange={handleNewAdalaberInput}
             />
 
-            <label htmlFor="name">Especialidad:</label>
+            <label htmlFor="speciality">Especialidad:</label>
             <input
               type="text"
               name="speciality"
