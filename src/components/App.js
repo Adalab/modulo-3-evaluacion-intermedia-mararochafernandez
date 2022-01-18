@@ -13,6 +13,7 @@ function App() {
     speciality: '',
   });
   const [searchName, setSearchName] = useState('');
+  const [searchCounselor, setSearchCounselor] = useState('');
 
   // api
   useEffect(() => {
@@ -49,6 +50,14 @@ function App() {
     setSearchName(event.currentTarget.value);
   };
 
+  const handleSearchCounselorInput = (event) => {
+    if (event.currentTarget.value === 'Todas') {
+      setSearchCounselor('');
+    } else {
+      setSearchCounselor(event.currentTarget.value);
+    }
+  };
+
   // render helpers
 
   const renderHeader = (title) => {
@@ -57,10 +66,14 @@ function App() {
 
   const renderAdalabers = () => {
     return adalabers
-      .filter((adalaber) =>
-        adalaber.name
-          .toLocaleLowerCase()
-          .includes(searchName.toLocaleLowerCase())
+      .filter(
+        (adalaber) =>
+          adalaber.name
+            .toLocaleLowerCase()
+            .includes(searchName.toLocaleLowerCase()) &&
+          adalaber.counselor
+            .toLocaleLowerCase()
+            .includes(searchCounselor.toLocaleLowerCase())
       )
       .map((adalaber, index) => (
         <tr key={index}>
@@ -88,6 +101,19 @@ function App() {
               value={searchName}
               onChange={handleSearchNameInput}
             />
+
+            <label htmlFor="searchCounselor">Tutora:</label>
+            <select
+              name="searchCounselor"
+              value={searchCounselor}
+              onChange={handleSearchCounselorInput}
+            >
+              <option defaultValue>Todas</option>
+              <option>Yanelis</option>
+              <option>Dayana</option>
+              <option>Iván</option>
+              <option>Miguel</option>
+            </select>
           </form>
         </section>
 
