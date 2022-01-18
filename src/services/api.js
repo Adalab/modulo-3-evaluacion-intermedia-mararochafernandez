@@ -6,11 +6,9 @@ const callToApi = () => {
     .then((response) =>
       response.results.map((result) => {
         return {
-          //id: result.id,
           name: result.name,
           counselor: result.counselor,
           speciality: result.speciality,
-          socialNetworks: result.social_networks,
         };
       })
     );
