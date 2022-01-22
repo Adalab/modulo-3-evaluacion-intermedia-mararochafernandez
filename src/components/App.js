@@ -1,6 +1,7 @@
 import '../styles/App.scss';
 import { useEffect, useState } from 'react';
 import callToApi from '../services/api';
+//import data from '../data/promo-patata';
 
 function App() {
   /* Let's do magic! 🦄🦄🦄 */
@@ -61,7 +62,7 @@ function App() {
   // render helpers
 
   const renderHeader = (title) => {
-    <h1>{title}</h1>;
+    return <h1>{title}</h1>;
   };
 
   const renderAdalabers = () => {
@@ -80,8 +81,30 @@ function App() {
           <td>{adalaber.name}</td>
           <td>{adalaber.counselor}</td>
           <td>{adalaber.speciality}</td>
+          {renderSocialNetworks(adalaber.social_networks)}
         </tr>
       ));
+  };
+
+  const renderSocialNetworks = (socialNetworks) => {
+    if (socialNetworks && socialNetworks.length > 0) {
+      return socialNetworks.map((socialNetwork, index) => (
+        <td key={index}>
+          <a href={socialNetwork.url}>{socialNetwork.name}</a>
+        </td>
+      ));
+    }
+  };
+
+  const getColspan = () => {
+    const colspan = adalabers.reduce((max, adalaber) => {
+      if (adalaber.social_networks && max < adalaber.social_networks.length) {
+        max = adalaber.social_networks.length;
+      }
+      return max;
+    }, 0);
+
+    return colspan ? colspan : null;
   };
 
   return (
@@ -123,6 +146,7 @@ function App() {
                 <th>Nombre</th>
                 <th>Tutora</th>
                 <th>Especialidad</th>
+                <th colSpan={getColspan()}>Redes sociales</th>
               </tr>
             </thead>
 
