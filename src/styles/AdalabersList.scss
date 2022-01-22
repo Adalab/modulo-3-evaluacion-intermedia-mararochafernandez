@@ -1,0 +1,45 @@
+@import 'core/variables';
+
+.table {
+  width: 100%;
+  font-size: 1.4em;
+  line-height: 1.4em;
+  border-spacing: 0;
+  border-collapse: separate;
+  margin: 10px 0;
+  border: 1px solid $color-table;
+
+  &__tr:nth-child(even) {
+    background-color: $color-table-bg;
+  }
+
+  &__th {
+    text-align: left;
+    padding: 10px;
+    background-color: $color-table-bg;
+    border-bottom: 1px solid $color-table;
+    width: 25%;
+  }
+
+  &__td {
+    font-weight: normal;
+    text-align: left;
+    padding: 10px;
+
+    &--social-networks {
+      display: flex;
+
+      .social-network + .social-network {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  &__tr + &__tr &__td {
+    border-top: 1px solid $color-table;
+  }
+}
+
+.social-network {
+  color: $color-main;
+}

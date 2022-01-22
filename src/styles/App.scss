@@ -1,0 +1,23 @@
+@import 'core/reset';
+@import 'core/variables';
+@import 'core/mixins';
+
+.page {
+  color: $color-main;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-secondary;
+  margin: 30px 20px;
+
+  @include tablet {
+    width: 688px;
+    margin: 30px auto;
+  }
+
+  @include desktop {
+    width: 1080px;
+  }
+}

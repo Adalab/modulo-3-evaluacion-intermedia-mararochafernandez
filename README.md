@@ -4,7 +4,7 @@ Módulo 3 - React
 
 Ejercicio de evaluación intermedia.
 
-URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluacion-intermedia-mararochafernandez/)
+**URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluacion-intermedia-mararochafernandez/)**
 
 ## Desarrollar una SPA con React:
 
@@ -30,6 +30,7 @@ URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluac
 - [ ] Obtener tutoras directamente de los resultados de la API
 - [ ] Generar id único con node-uuid
 - [ ] Guardar datos en almacenamiento local
+- [ ] Crear componentes
 
 ---
 
@@ -41,4 +42,4 @@ URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluac
 
 ---
 
-Happy coding!
+_Happy coding!_

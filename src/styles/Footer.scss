@@ -1,0 +1,55 @@
+@import 'core/variables';
+@import 'core/mixins';
+
+.footer {
+  font-size: 1.6em;
+  color: $color-footer;
+  border-top: 1px solid $color-table;
+  background-color: $color-table-bg;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 20px 0;
+    padding-bottom: 30px;
+
+    @include tablet {
+      width: 688px;
+      margin: 30px auto 0;
+      flex-direction: row;
+      align-items: baseline;
+      padding-bottom: 30px;
+    }
+
+    @include desktop {
+      width: 1080px;
+    }
+  }
+
+  &__copy {
+    padding-bottom: 5px;
+    @include tablet {
+      padding-top: 5px;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+
+    @include tablet {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item {
+    padding: 5px 5px;
+  }
+
+  &__link {
+    color: $color-footer;
+  }
+}

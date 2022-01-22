@@ -1,0 +1,30 @@
+@import 'core/variables';
+@import 'core/mixins';
+
+.header {
+  background-color: $color-title;
+
+  &__wrapper {
+    padding: 0 20px;
+
+    @include tablet {
+      width: 688px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    @include desktop {
+      width: 1080px;
+    }
+  }
+
+  &__title {
+    font-size: 4em;
+    line-height: 1.6em;
+  }
+
+  &__subtitle {
+    font-size: 3em;
+    line-height: 1.6em;
+  }
+}

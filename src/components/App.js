@@ -1,13 +1,18 @@
 import '../styles/App.scss';
 import { useEffect, useState } from 'react';
 import callToApi from '../services/api';
-//import data from '../data/promo-patata';
+import data from '../data/promo-patata';
+import Header from './Header';
+import Search from './Search';
+import AdalabersList from './AdalabersList';
+import NewAdalaber from './NewAdalaber';
+import Footer from './Footer';
 
 function App() {
   /* Let's do magic! 🦄🦄🦄 */
 
   // state
-  const [adalabers, setAdalabers] = useState([]);
+  const [adalabers, setAdalabers] = useState(data.results);
   const [newAdalaber, setNewAdalaber] = useState({
     name: '',
     counselor: '',
@@ -24,10 +29,6 @@ function App() {
   }, []);
 
   // event handlers
-
-  const handleForm = (event) => {
-    event.preventDefault();
-  };
 
   const handleNewAdalaberInput = (event) => {
     setNewAdalaber({
@@ -61,10 +62,6 @@ function App() {
 
   // render helpers
 
-  const renderHeader = (title) => {
-    return <h1>{title}</h1>;
-  };
-
   const renderAdalabers = () => {
     return adalabers
       .filter(
@@ -77,11 +74,15 @@ function App() {
             .includes(searchCounselor.toLocaleLowerCase())
       )
       .map((adalaber, index) => (
-        <tr key={index}>
-          <td>{adalaber.name}</td>
-          <td>{adalaber.counselor}</td>
-          <td>{adalaber.speciality}</td>
-          {renderSocialNetworks(adalaber.social_networks)}
+        <tr key={index} className="table__tr">
+          <td className="table__td">{adalaber.name}</td>
+          <td className="table__td">{adalaber.counselor}</td>
+          <td className="table__td">{adalaber.speciality}</td>
+          <td className="table__td table__td--social-networks">
+            {adalaber.social_networks && adalaber.social_networks.length > 0
+              ? renderSocialNetworks(adalaber.social_networks)
+              : '-'}
+          </td>
         </tr>
       ));
   };
@@ -89,110 +90,50 @@ function App() {
   const renderSocialNetworks = (socialNetworks) => {
     if (socialNetworks && socialNetworks.length > 0) {
       return socialNetworks.map((socialNetwork, index) => (
-        <td key={index}>
-          <a href={socialNetwork.url}>{socialNetwork.name}</a>
-        </td>
+        <a
+          key={index}
+          className="social-network"
+          href={socialNetwork.url}
+          title={socialNetwork.name}
+        >
+          {socialNetwork.name}
+        </a>
       ));
     }
-  };
-
-  const getColspan = () => {
-    const colspan = adalabers.reduce((max, adalaber) => {
-      if (adalaber.social_networks && max < adalaber.social_networks.length) {
-        max = adalaber.social_networks.length;
-      }
-      return max;
-    }, 0);
-
-    return colspan ? colspan : null;
   };
 
   return (
     // HTML ✨
 
-    <div className="app">
-      <header>{renderHeader('Adalabers')}</header>
+    <div className="page">
+      <Header title="Adalabers" />
 
-      <main>
-        <section>
-          <form onSubmit={handleForm}>
-            <label htmlFor="searchName">Nombre:</label>
-            <input
-              type="text"
-              name="searchName"
-              id="searchName"
-              value={searchName}
-              onChange={handleSearchNameInput}
-            />
+      <main className="main">
+        <div className="main__wrapper">
+          <Search
+            searchName={searchName}
+            searchCounselor={searchCounselor}
+            handleSearchNameInput={handleSearchNameInput}
+            handleSearchCounselorInput={handleSearchCounselorInput}
+          />
 
-            <label htmlFor="searchCounselor">Tutora:</label>
-            <select
-              name="searchCounselor"
-              value={searchCounselor}
-              onChange={handleSearchCounselorInput}
-            >
-              <option defaultValue>Todas</option>
-              <option>Yanelis</option>
-              <option>Dayana</option>
-              <option>Iván</option>
-            </select>
-          </form>
-        </section>
-
-        <section>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Tutora</th>
-                <th>Especialidad</th>
-                <th colSpan={getColspan()}>Redes sociales</th>
-              </tr>
-            </thead>
-
-            <tbody>{renderAdalabers()}</tbody>
-          </table>
-        </section>
-
-        <section>
-          <h2>Añadir nueva Adalaber</h2>
-
-          <form onSubmit={handleForm}>
-            <label htmlFor="name">Nombre:</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={newAdalaber.name}
-              onChange={handleNewAdalaberInput}
-            />
-
-            <label htmlFor="counselor">Tutora:</label>
-            <input
-              type="text"
-              name="counselor"
-              id="counselor"
-              value={newAdalaber.counselor}
-              onChange={handleNewAdalaberInput}
-            />
-
-            <label htmlFor="speciality">Especialidad:</label>
-            <input
-              type="text"
-              name="speciality"
-              id="speciality"
-              value={newAdalaber.speciality}
-              onChange={handleNewAdalaberInput}
-            />
-
-            <input
-              type="submit"
-              value="Añadir nueva Adalaber"
-              onClick={handleNewAdalaberButton}
-            />
-          </form>
-        </section>
+          <AdalabersList renderAdalabers={renderAdalabers} />
+        </div>
       </main>
+
+      <Header subtitle="Nueva Adalaber" />
+
+      <section className="main">
+        <div className="main__wrapper">
+          <NewAdalaber
+            newAdalaber={newAdalaber}
+            handleNewAdalaberInput={handleNewAdalaberInput}
+            handleNewAdalaberButton={handleNewAdalaberButton}
+          />
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }

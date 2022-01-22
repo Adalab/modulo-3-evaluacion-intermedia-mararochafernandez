@@ -1,0 +1,81 @@
+.form {
+  font-size: 1.6em;
+  line-height: 1.6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  &--add {
+    margin-bottom: 10px;
+  }
+
+  @include tablet {
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &--add &__fieldset {
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__label {
+    padding-right: 0;
+    margin-bottom: 5px;
+
+    @include tablet {
+      padding-right: 10px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &--add &__label {
+    @include tablet {
+      margin-bottom: 5px;
+    }
+  }
+
+  &__input {
+    font-size: 1em;
+    border: 1px solid $color-input;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: $color-secondary;
+
+    @include tablet {
+      width: 220px;
+    }
+  }
+
+  &__button {
+    font-size: 1em;
+    line-height: 20px;
+    display: block;
+    border: none;
+    color: $color-secondary;
+    background-color: $color-main;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+
+    @include tablet {
+      width: 220px;
+    }
+  }
+}
