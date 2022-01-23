@@ -13,24 +13,26 @@ const AdalabersList = (props) => {
 
   const renderAdalabers = () => {
     return filteredAdalabers.length > 0 ? (
-      filteredAdalabers.map((adalaber) => (
-        <tr key={adalaber.id} className="table__tr">
-          <td className="table__td">{adalaber.name}</td>
-          <td className="table__td">{adalaber.counselor}</td>
-          <td className="table__td">{adalaber.speciality}</td>
+      filteredAdalabers
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((adalaber) => (
+          <tr key={adalaber.id} className="table__tr">
+            <td className="table__td">{adalaber.name}</td>
+            <td className="table__td">{adalaber.counselor}</td>
+            <td className="table__td">{adalaber.speciality}</td>
 
-          {adalaber.social_networks && adalaber.social_networks.length > 0 ? (
-            <td className="table__td table__td--social-networks">
-              {renderSocialNetworks(adalaber.social_networks)}
-            </td>
-          ) : (
-            <td className="table__td"></td>
-          )}
-        </tr>
-      ))
+            {adalaber.social_networks && adalaber.social_networks.length > 0 ? (
+              <td className="table__td table__td--social-networks">
+                {renderSocialNetworks(adalaber.social_networks)}
+              </td>
+            ) : (
+              <td className="table__td"></td>
+            )}
+          </tr>
+        ))
     ) : (
       <tr className="table__tr">
-        <td className="table__td table__td--centered" colspan="4">
+        <td className="table__td table__td--centered" colSpan="4">
           No hay resultados de búsqueda.
         </td>
       </tr>
