@@ -1,4 +1,4 @@
-@import 'core/variables';
+@import '../core/variables';
 
 .table {
   width: 100%;
@@ -32,6 +32,10 @@
       .social-network + .social-network {
         padding-left: 10px;
       }
+    }
+
+    &--centered {
+      text-align: center;
     }
   }
 

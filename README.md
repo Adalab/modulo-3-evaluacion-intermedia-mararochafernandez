@@ -17,7 +17,7 @@ Ejercicio de evaluación intermedia.
 
 - Crear formulario con los campos: nombre, tutora, especialidad y botón 'Añadir nueva Adalaber'.
 - Al pulsar el botón, añadir nueva Adalaber al listado.
-- TIPS: dónde guardar los datos del formulario, qué tipo de datos se van a guardar, qué valores iniciales tienen esos datos.
+- TIPS: dónde guardar los datos del formulario, qué tipo de datos se van a guardar, qué valores iniciales tienen estos datos.
 
 ## Bonus:
 
@@ -25,18 +25,18 @@ Ejercicio de evaluación intermedia.
 4. Mostrar redes sociales
 5. Maquetación
 
-### Tareas para mejorar el ejercicio:
+## Ideas para mejorar el ejercicio:
 
-- [ ] Obtener tutoras directamente de los resultados de la API
-- [ ] Generar id único con node-uuid
-- [ ] Guardar datos en almacenamiento local
-- [ ] Crear componentes
+- [x] Obtener tutoras directamente de los resultados de la API
+- [x] Generar id único con node-uuid
+- [x] Guardar datos en almacenamiento local
+- [x] Crear componentes
 
 ---
 
 # My React Starter Kit ✨
 
-- NPM dependencies: `node-sass`
+- NPM dependencies: `node-sass` `node-uuid`
 - Services: API and Local Storage
 - Publish in GitHub Pages: `npm run githubpages`
 

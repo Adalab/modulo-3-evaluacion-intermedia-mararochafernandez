@@ -1,44 +1,66 @@
-import '../styles/App.scss';
+import '../styles/components/App.scss';
 import { useEffect, useState } from 'react';
 import callToApi from '../services/api';
-import data from '../data/promo-patata';
+import ls from '../services/localstorage';
+//import data from '../data/promo-patata';
 import Header from './Header';
-import Search from './Search';
+import FormSearch from './FormSearch';
 import AdalabersList from './AdalabersList';
-import NewAdalaber from './NewAdalaber';
+import FormNewAdalaber from './FormNewAdalaber';
 import Footer from './Footer';
+import { v4 as uuid } from 'uuid';
 
 function App() {
   /* Let's do magic! 🦄🦄🦄 */
 
   // state
-  const [adalabers, setAdalabers] = useState(data.results);
-  const [newAdalaber, setNewAdalaber] = useState({
-    name: '',
-    counselor: '',
-    speciality: '',
-  });
+
+  const [adalabers, setAdalabers] = useState(ls.get('adalabers', []));
+  const [newAdalaber, setNewAdalaber] = useState(
+    ls.get('newAdalaber', {
+      name: '',
+      counselor: '',
+      speciality: '',
+    })
+  );
   const [searchName, setSearchName] = useState('');
   const [searchCounselor, setSearchCounselor] = useState('');
 
   // api
+
   useEffect(() => {
-    callToApi().then((response) => {
-      setAdalabers(response);
-    });
+    if (adalabers.length === 0) {
+      callToApi().then((response) => {
+        setAdalabers(response);
+      });
+    }
   }, []);
+
+  // local storage
+
+  useEffect(() => {
+    ls.set('adalabers', adalabers);
+    ls.set('newAdalaber', newAdalaber);
+  }, [adalabers, newAdalaber]);
 
   // event handlers
 
-  const handleNewAdalaberInput = (event) => {
-    setNewAdalaber({
-      ...newAdalaber,
-      [event.currentTarget.id]: event.currentTarget.value,
-    });
+  const handleInputChange = (id, value) => {
+    if (id === 'searchName') {
+      setSearchName(value);
+    } else if (id === 'searchCounselor') {
+      setSearchCounselor(value);
+    } else {
+      setNewAdalaber({
+        ...newAdalaber,
+        [id]: value,
+      });
+    }
   };
 
-  const handleNewAdalaberButton = () => {
+  const handleButtonClick = () => {
     if (newAdalaber.name && newAdalaber.counselor && newAdalaber.speciality) {
+      newAdalaber.id = uuid();
       setAdalabers([...adalabers, newAdalaber]);
       setNewAdalaber({
         name: '',
@@ -48,59 +70,11 @@ function App() {
     }
   };
 
-  const handleSearchNameInput = (event) => {
-    setSearchName(event.currentTarget.value);
-  };
-
-  const handleSearchCounselorInput = (event) => {
-    if (event.currentTarget.value === 'Todas') {
-      setSearchCounselor('');
-    } else {
-      setSearchCounselor(event.currentTarget.value);
-    }
-  };
-
-  // render helpers
-
-  const renderAdalabers = () => {
-    return adalabers
-      .filter(
-        (adalaber) =>
-          adalaber.name
-            .toLocaleLowerCase()
-            .includes(searchName.toLocaleLowerCase()) &&
-          adalaber.counselor
-            .toLocaleLowerCase()
-            .includes(searchCounselor.toLocaleLowerCase())
-      )
-      .map((adalaber, index) => (
-        <tr key={index} className="table__tr">
-          <td className="table__td">{adalaber.name}</td>
-          <td className="table__td">{adalaber.counselor}</td>
-          <td className="table__td">{adalaber.speciality}</td>
-          <td className="table__td table__td--social-networks">
-            {adalaber.social_networks && adalaber.social_networks.length > 0
-              ? renderSocialNetworks(adalaber.social_networks)
-              : '-'}
-          </td>
-        </tr>
-      ));
-  };
-
-  const renderSocialNetworks = (socialNetworks) => {
-    if (socialNetworks && socialNetworks.length > 0) {
-      return socialNetworks.map((socialNetwork, index) => (
-        <a
-          key={index}
-          className="social-network"
-          href={socialNetwork.url}
-          title={socialNetwork.name}
-        >
-          {socialNetwork.name}
-        </a>
-      ));
-    }
-  };
+  // array with unique values (remove duplicates): https://stackoverflow.com/a/14438954/17472294
+  const counselors = adalabers
+    .map((adalaber) => adalaber.counselor)
+    .sort()
+    .filter((value, index, array) => array.indexOf(value) === index);
 
   return (
     // HTML ✨
@@ -110,14 +84,18 @@ function App() {
 
       <main className="main">
         <div className="main__wrapper">
-          <Search
+          <FormSearch
             searchName={searchName}
             searchCounselor={searchCounselor}
-            handleSearchNameInput={handleSearchNameInput}
-            handleSearchCounselorInput={handleSearchCounselorInput}
+            counselors={counselors}
+            handleInputChange={handleInputChange}
           />
 
-          <AdalabersList renderAdalabers={renderAdalabers} />
+          <AdalabersList
+            adalabers={adalabers}
+            searchName={searchName}
+            searchCounselor={searchCounselor}
+          />
         </div>
       </main>
 
@@ -125,10 +103,10 @@ function App() {
 
       <section className="main">
         <div className="main__wrapper">
-          <NewAdalaber
+          <FormNewAdalaber
             newAdalaber={newAdalaber}
-            handleNewAdalaberInput={handleNewAdalaberInput}
-            handleNewAdalaberButton={handleNewAdalaberButton}
+            handleInputChange={handleInputChange}
+            handleButtonClick={handleButtonClick}
           />
         </div>
       </section>

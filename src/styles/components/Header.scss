@@ -1,5 +1,5 @@
-@import 'core/variables';
-@import 'core/mixins';
+@import '../core/variables';
+@import '../core/mixins';
 
 .header {
   background-color: $color-title;
@@ -21,10 +21,18 @@
   &__title {
     font-size: 4em;
     line-height: 1.6em;
+
+    @include tablet {
+      font-size: 5em;
+    }
   }
 
   &__subtitle {
     font-size: 3em;
     line-height: 1.6em;
+
+    @include tablet {
+      font-size: 4em;
+    }
   }
 }

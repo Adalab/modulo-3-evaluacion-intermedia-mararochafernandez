@@ -1,3 +1,6 @@
+@import '../core/variables';
+@import '../core/mixins';
+
 .form {
   font-size: 1.6em;
   line-height: 1.6em;
@@ -6,7 +9,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
 
-  &--add {
+  &--new {
     margin-bottom: 10px;
   }
 
@@ -25,7 +28,7 @@
     }
   }
 
-  &--add &__fieldset {
+  &--new &__fieldset {
     @include tablet {
       flex-direction: column;
       align-items: flex-start;
@@ -42,22 +45,24 @@
     }
   }
 
-  &--add &__label {
+  &--new &__label {
     @include tablet {
       margin-bottom: 5px;
     }
   }
 
-  &__input {
-    font-size: 1em;
-    border: 1px solid $color-input;
-    padding: 5px;
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: $color-secondary;
+  .form {
+    &__input {
+      font-size: 1em;
+      border: 1px solid $color-input;
+      padding: 5px;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: $color-secondary;
 
-    @include tablet {
-      width: 220px;
+      @include tablet {
+        width: 220px;
+      }
     }
   }
 
@@ -76,6 +81,12 @@
 
     @include tablet {
       width: 220px;
+    }
+
+    &:disabled {
+      color: $color-table;
+      background-color: $color-table-bg;
+      cursor: default;
     }
   }
 }

@@ -1,4 +1,4 @@
-import '../styles/Header.scss';
+import '../styles/components/Header.scss';
 
 const Header = (props) => {
   const title = props.title ? (
