@@ -4,7 +4,7 @@ Módulo 3 - React
 
 Ejercicio de evaluación intermedia.
 
-**URL del ejercicio: [Listado de Adalabers](http://beta.adalab.es/modulo-3-evaluacion-intermedia-mararochafernandez/)**
+**URL del ejercicio: [Listado de Adalabers](https://mararochafernandez.github.io/modulo-3-evaluacion-intermedia/)**
 
 ## Desarrollar una SPA con React:
 
