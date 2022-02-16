@@ -1,21 +1,21 @@
 import '../styles/components/App.scss';
 import { useEffect, useState } from 'react';
-import callToApi from '../services/api';
+//import callToApi from '../services/api';
 import ls from '../services/localstorage';
-//import data from '../data/promo-patata';
+import data from '../data/promo-patata';
 import Header from './Header';
 import FormSearch from './FormSearch';
 import AdalabersList from './AdalabersList';
 import FormNewAdalaber from './FormNewAdalaber';
 import Footer from './Footer';
-import { v4 as uuid } from 'uuid';
+import { nanoid as uuid } from 'nanoid';
 
 function App() {
   /* Let's do magic! 🦄🦄🦄 */
 
   // state
 
-  const [adalabers, setAdalabers] = useState(ls.get('adalabers', []));
+  const [adalabers, setAdalabers] = useState(ls.get('adalabers', data.results));
   const [newAdalaber, setNewAdalaber] = useState(
     ls.get('newAdalaber', {
       name: '',
@@ -28,14 +28,13 @@ function App() {
 
   // api
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (adalabers.length === 0) {
       callToApi().then((response) => {
         setAdalabers(response);
       });
     }
-  }, []);
-
+  }, []);*/
   // local storage
 
   useEffect(() => {

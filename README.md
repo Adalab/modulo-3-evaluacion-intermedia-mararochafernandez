@@ -27,16 +27,18 @@ Ejercicio de evaluación intermedia.
 
 ## Ideas para mejorar el ejercicio:
 
-- [x] Obtener tutoras directamente de los resultados de la API
-- [x] Generar id único con node-uuid
+- [x] Obtener tutoras directamente de los resultados de la API \*
+- [x] Generar id único con Nano ID
 - [x] Guardar datos en almacenamiento local
 - [x] Crear componentes
+
+* La API no funciona, ahora los datos se obtienen de un archivo JSON.
 
 ---
 
 # My React Starter Kit ✨
 
-- NPM dependencies: `node-sass` `node-uuid`
+- NPM dependencies: `node-sass` `nanoid`
 - Services: API and Local Storage
 - Publish in GitHub Pages: `npm run githubpages`
 
