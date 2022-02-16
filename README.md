@@ -32,7 +32,7 @@ Ejercicio de evaluación intermedia.
 - [x] Guardar datos en almacenamiento local
 - [x] Crear componentes
 
-* La API no funciona, ahora los datos se obtienen de un archivo JSON.
+(\*) La API no funciona, ahora los datos se obtienen de un archivo JSON.
 
 ---
 
